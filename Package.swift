@@ -5,24 +5,50 @@ import PackageDescription
 
 let package = Package(
     name: "LoLoGOExtensions",
+    defaultLocalization: "zh",
+    platforms: [.iOS(.v13)],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "LoLoGOExtensions",
-            targets: ["LoLoGOExtensions"]),
+        // MARK: - 纯Swift库
+        .library(name: "LoLoGOExtensions",targets: ["LoLoGOExtensions"]),
+        // MARK: - 纯Objective-C库
+        .library(name: "LoLoGOExtensionsOC", targets: ["LoLoGOExtensionsOC"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "LoLoGOExtensions",
-            dependencies: []),
-        .testTarget(
-            name: "LoLoGOExtensionsTests",
-            dependencies: ["LoLoGOExtensions"]),
+        // MARK: - 纯Swift目标 - 依赖纯Objective-C目标以复用Objective-C代码
+        .target(name: "LoLoGOExtensions", dependencies: ["LoLoGOExtensionsOC"],
+                exclude: [],
+                resources: [
+                    
+                ],
+                swiftSettings: [
+                    .define("PACKAGECONFIGURATION_DEBUG", .when(platforms: nil, configuration: .debug)),
+                    .define("PACKAGECONFIGURATION_RELEASE", .when(platforms: nil, configuration: .release)),
+                    //.unsafeFlags(["-suppress-warnings"]),// 压制编译警告
+                ]),
+        
+        // MARK: - 纯Objective-C目标
+        .target(name: "LoLoGOExtensionsOC", dependencies: [], path: "Sources/LoLoGOExtensionsOC",
+                exclude: [],
+                resources: [],
+                publicHeadersPath: "",
+                cSettings: []),
+                //cSettings: [.unsafeFlags(["-w"])]), // 压制所有编译警告
+        
+        // MARK: - 纯Swift测试目标用来测试两个库
+        .testTarget(name: "LoLoGOExtensionsTests", dependencies: ["LoLoGOExtensions"],
+                    exclude: [],
+                    resources: [
+                        
+                   ],
+                   swiftSettings: []),
+        
+        // MARK: - 纯Objective-C测试目标用来测试两个库
+        .testTarget(name: "LoLoGOExtensionsOCTests", dependencies: ["LoLoGOExtensions", "LoLoGOExtensionsOC"],
+                    exclude: [],
+                    resources: [],
+                    cSettings: []),
     ]
 )
