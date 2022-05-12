@@ -87,25 +87,4 @@
 }
 
 
-- (NSData *)headDataFormat {
-    Byte byte[16];
-    byte[0] = (self.mPackageLength >> 24) & 0xff;
-    byte[1] = (self.mPackageLength >> 16) & 0xff;
-    byte[2] = (self.mPackageLength >> 8) & 0xff;
-    byte[3] = self.mPackageLength&0xff;
-    byte[4] = (self.mHeadLengh >> 8) & 0xff;
-    byte[5] = self.mHeadLengh & 0xff;
-    byte[6] = (self.mVersion >> 8) & 0xff;
-    byte[7] = self.mVersion & 0xff;
-    byte[8] = (self.mCommand >> 24) & 0xff;
-    byte[9] = (self.mCommand >> 16) & 0xff;
-    byte[10] = (self.mCommand >> 8) & 0xff;
-    byte[11] = self.mCommand & 0xff;
-    byte[12] = (self.mSessionId >> 24) & 0xff;
-    byte[13] = (self.mSessionId >> 16) & 0xff;
-    byte[14] = (self.mSessionId >> 8) & 0xff;
-    byte[15] = self.mSessionId & 0xff;
-    NSData *headData = [NSData dataWithBytes:byte length:sizeof(byte)];
-    return headData;
-}
 @end

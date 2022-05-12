@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 // 转换成小端字节序 - 内部API
 + (unsigned char)hexLowModeFromChar:(unsigned char)tempChar;
 
-- (NSData *)headDataFormat;
 @end
 
 NS_ASSUME_NONNULL_END
