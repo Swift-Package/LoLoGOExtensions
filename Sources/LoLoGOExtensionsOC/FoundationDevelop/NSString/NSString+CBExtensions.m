@@ -1,14 +1,13 @@
 //
-//  NSString+Extensions.m
+//  NSString+CBExtensions.m
 //  
 //
-//  Created by 杨俊艺 on 2022/5/10.
+//  Created by linqipeng on 2022/5/18.
 //
 
-#import "NSString+Extensions.h"
+#import "NSString+CBExtensions.h"
 
-@implementation NSString (Extensions)
-
+@implementation NSString (CBExtensions)
 // NSData转为NSString（非NSUTF8转换）
 + (NSString *)stringFromData:(NSData *)data {
     Byte *bytes = (Byte *)[data bytes];
@@ -23,5 +22,4 @@
     }
     return string;
 }
-
 @end

@@ -1,5 +1,5 @@
 //
-//  NSData+Extensions.h
+//  NSData+CBExtensions.h
 //  
 //
 //  Created by linqipeng on 2022/5/18.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSData (Extensions)
+@interface NSData (CBExtensions)
 // 反转字节序列代码
 + (NSData *)dataWithReverse:(NSData *)srcData;
 // 转换成大端字节序 - 内部API

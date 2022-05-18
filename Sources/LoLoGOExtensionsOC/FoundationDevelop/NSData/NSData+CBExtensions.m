@@ -1,13 +1,13 @@
 //
-//  NSData+Extensions.m
+//  NSData+CBExtensions.m
 //  
 //
 //  Created by linqipeng on 2022/5/18.
 //
 
-#import "NSData+Extensions.h"
+#import "NSData+CBExtensions.h"
 
-@implementation NSData (Extensions)
+@implementation NSData (CBExtensions)
 // 反转字节序列代码
 + (NSData *)dataWithReverse:(NSData *)srcData
 {
@@ -118,6 +118,4 @@
     }
     return data;
 }
-            
-
 @end
