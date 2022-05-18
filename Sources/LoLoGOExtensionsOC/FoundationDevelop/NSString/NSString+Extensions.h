@@ -9,10 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-
-
 @interface NSString (Extensions)
+// NSData转为NSString（非NSUTF8转换）
++ (NSString *)stringFromData:(NSData *)data;
 
 @end
 

@@ -1,13 +1,13 @@
 //
-//  NSData+Char.m
+//  NSData+Extensions.m
 //  
 //
-//  Created by linqipeng on 2022/5/11.
+//  Created by linqipeng on 2022/5/18.
 //
 
-#import "NSData+Char.h"
+#import "NSData+Extensions.h"
 
-@implementation NSData (Char)
+@implementation NSData (Extensions)
 // 反转字节序列代码
 + (NSData *)dataWithReverse:(NSData *)srcData
 {
@@ -86,5 +86,38 @@
     return temp;
 }
 
+// NSString转为NSData（非NSUTF8转换）
++ (NSData *)dataFromString:(NSString *)string {
+    const char *ch = [[string lowercaseString] cStringUsingEncoding:NSUTF8StringEncoding];
+    NSMutableData *data = [NSMutableData data];
+    while (*ch) {
+        if (*ch == ' ') {
+            continue;
+        }
+        char byte = 0;
+        if ('0' <= *ch && *ch <= '9') {
+            byte = *ch - '0';
+        } else if ('a' <= *ch && *ch <= 'f') {
+            byte = *ch - 'a' + 10;
+        } else if ('A' <= *ch && *ch <= 'F') {
+            byte = *ch - 'A' + 10;
+        }
+        ch++;
+        byte = byte << 4;
+        if (*ch) {
+            if ('0' <= *ch && *ch <= '9') {
+                byte += *ch - '0';
+            } else if ('a' <= *ch && *ch <= 'f') {
+                byte += *ch - 'a' + 10;
+            } else if('A' <= *ch && *ch <= 'F') {
+                byte += *ch - 'A' + 10;
+            }
+            ch++;
+        }
+        [data appendBytes:&byte length:1];
+    }
+    return data;
+}
+            
 
 @end
